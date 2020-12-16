@@ -1,0 +1,7 @@
+{
+  "name": "fw-react-input-masking",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
