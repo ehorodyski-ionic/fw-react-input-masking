@@ -16,14 +16,22 @@ const CurrencyInput: React.FC<CurrencyInputProps> = ({ value, onChange }) => {
       const nativeInput = await input.getInputElement();
 
       const mask = IMask(nativeInput, {
-        mask: Number,
-        thousandsSeparator: ',',
-      }).on('accept', (e: any) => {
-        mask.updateValue();
-        onChange(mask.value);
-        console.log('accept', mask.value);
-        mask.updateValue();
-      });
+        mask: '$num',
+        lazy: true,
+        blocks: {
+          num: {
+            mask: Number,
+            thousandsSeparator: ',',
+            scale: 2,
+          },
+        },
+      })
+        .on('accept', (e: any) => {
+          onChange(mask.value);
+        })
+        .on('complete', (e: any) => {
+          onChange(mask.value);
+        });
 
       maskRef.current = mask;
     },
